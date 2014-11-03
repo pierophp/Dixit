@@ -59,12 +59,16 @@ class BunnyPalette(object):
     BLUE   = '214ddc'
     PURPLE = 'a41bf3'
     PINK   = 'd2638d'
-    WHITE  = 'd3ceca'
+    SILVER  = 'd3ceca'
     BLACK  = '3a363b'
+    WHITE  = 'FFFFFF'
+    LIME   = '#03FF00'
+    SKY    = '00E7FF'
 
     @classmethod
     def is_colour(cls, cid):
         """Determines if the given colour id is valid."""
         return cid in (cls.RED, cls.ORANGE, cls.YELLOW,
                        cls.GREEN, cls.BLUE, cls.PURPLE,
-                       cls.PINK, cls.WHITE, cls.BLACK)
+                       cls.PINK, cls.SILVER, cls.BLACK,
+                       cls.WHITE, cls.LIME, cls.SKY)

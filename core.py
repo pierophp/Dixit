@@ -18,7 +18,7 @@ class Limits(object):
     MAX_NAME = 20
 
     MIN_PLAYERS = 3
-    MAX_PLAYERS = 9
+    MAX_PLAYERS = 16
 
     MIN_SCORE = 1
     MAX_SCORE = INFINITY

@@ -266,12 +266,21 @@ $(document).ready(function() {
                 scoreBoard.push(Array(data.ranked[puid] + 1).join('<td>&nbsp;</td>'));
 
                 // Player's bunny piece and score
-                scoreBoard.push('<td class="bunnyPiece"><div style="background-color: #' + data.colours[puid]
-                              + '" title="' + textToHtml(data.players[puid]) + '"><img src="'
+                if(data.colours[puid] == 'rainbow'){
+					scoreBoard.push('<td class="bunnyPiece"><div class="rainbow" '
+							+ 'title="' + textToHtml(data.players[puid]) + '"><img src="'
                               + ((data.state == {{ states.BEGIN }} || data.state == {{ states.END }})
                                ? '{{ display.Images.BUNNY_READY }}' : '{{ display.Images.BUNNY_RUN }}')
                               + '" /></div></td>');
-                scoreBoard.push('<td class="score">' + data.scores[puid] + '</td>');
+					scoreBoard.push('<td class="score">' + data.scores[puid] + '</td>');
+				}else{
+					scoreBoard.push('<td class="bunnyPiece"><div style="background-color: #' + data.colours[puid]
+								  + '" title="' + textToHtml(data.players[puid]) + '"><img src="'
+								  + ((data.state == {{ states.BEGIN }} || data.state == {{ states.END }})
+								   ? '{{ display.Images.BUNNY_READY }}' : '{{ display.Images.BUNNY_RUN }}')
+								  + '" /></div></td>');
+					scoreBoard.push('<td class="score">' + data.scores[puid] + '</td>');
+				}
 
                 // Spacers to make every row have the same number of cells
                 scoreBoard.push(Array(maxRank - data.ranked[puid] + 1).join('<td>&nbsp;</td>'));
