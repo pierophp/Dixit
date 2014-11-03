@@ -13,5 +13,5 @@
     },
 
     // utils.hash_obj() of password for /admin/ page
-    "admin_password" : '9dfd55f332261da3404cfbae6425b52b5af48ea27ab26a1fc42868b458c285c0'
+    "admin_password" : "9dfd55f332261da3404cfbae6425b52b5af48ea27ab26a1fc42868b458c285c0"
 }
