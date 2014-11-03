@@ -3,6 +3,7 @@
 from collections import defaultdict
 import random
 import time
+import datetime
 
 from codes import APIError, Codes
 from deck import Deck
@@ -13,16 +14,16 @@ from utils import INFINITY
 class Limits(object):
     """Static parameter limits for validation."""
 
-    MIN_NAME = 3
+    MIN_NAME = 1
     MAX_NAME = 20
 
     MIN_PLAYERS = 3
-    MAX_PLAYERS = 6
+    MAX_PLAYERS = 9
 
     MIN_SCORE = 1
     MAX_SCORE = INFINITY
 
-    MIN_CLUE_LENGTH = 5
+    MIN_CLUE_LENGTH = 1
     MAX_CLUE_LENGTH = 100000
 
     MAX_MESSAGE = 1024
@@ -301,6 +302,14 @@ class Game(object):
             for p in self.players.itervalues():
                 if p.score >= self.max_score:
                     self.state = States.END
+                    f = open('scores/'+p.user.uid, 'a')
+                    f.write(str(p.score+5)+"\n")
+                    f.close();
+                else:
+                    f = open('scores/'+p.user.uid, 'a')
+                    f.write(str(p.score)+"\n")
+                    f.close();
+
         self.ping()
 
     def _do_scoring(self):

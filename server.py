@@ -37,7 +37,8 @@ class RequestHandler(tornado.web.RequestHandler):
         if not self.application.users.has_user(uid):
             if uid is None:
                 uid = hash_obj(id(self), add_random=True)
-                self.set_cookie(self.USER_COOKIE_NAME, uid)
+                expires = datetime.datetime.utcnow() + datetime.timedelta(days=365)
+                self.set_cookie(self.USER_COOKIE_NAME, uid, expires=expires)
             puid = hash_obj(uid, add_random=True)
             self.user = self.application.users.add_user(uid, puid)
         else:
@@ -85,7 +86,7 @@ class AdminHandler(RequestHandler):
         self.render('admin.html', display=display)
 
     def post(self):
-        admin_password = hash_obj(self.get_argument('password'))
+        admin_password = self.get_argument('password')
         if admin_password != self.application.admin_password:
             stdout = ''
             stderr = 'Invalid password'
@@ -131,7 +132,7 @@ class CreateHandler(RequestHandler):
             password = hash_obj(password)
         name = self.get_argument('name', '')
         if not name:
-            name = 'Game %d' % (len(self.application.games) + 1)
+            name = 'Gra %d' % (len(self.application.games) + 1)
 
         max_score = self.get_argument('max_score')
         if not max_score:

@@ -7,8 +7,8 @@ class Labels(object):
     """Text labels."""
 
     TITLE = 'Dixit'
-    NEW_GAME = 'New Game'
-    DEFAULT_TEXT = 'Say something!'
+    NEW_GAME = 'Nowa gra'
+    DEFAULT_TEXT = ''
 
 
 class WebPaths(object):
@@ -43,8 +43,8 @@ class Sizes(object):
 
     PIECE        = 45
     BUNNY_PICKER = 70
-    CARD_WIDTH   = 250
-    CARD_HEIGHT  = 380
+    CARD_WIDTH   = 200
+    CARD_HEIGHT  = 325
     YOUR_TURN    = 24
     TOKEN        = 80
 

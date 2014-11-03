@@ -1,13 +1,17 @@
 {
     // Port for the server to listen on.
-    "port" : 80,
+    "port" : 4660,
 
     // Sets of cards available, used to build a deck for a game.
     "card_sets" : {
         // <name-of-card-set> : [static/cards/<folder>, <is-default-checked>]
-        "Dixit" : ["dixit", true]
+        "Dixit" : ["dixit", true],
+        "Anonim" : ["anonim", false],
+        "Antros" : ["antros", false],
+        "Damiinho" : ["daminio", false],
+        "Wielkanoc" : ["wielkanoc", false]
     },
 
     // utils.hash_obj() of password for /admin/ page
-    "admin_password" : "4a4fd0c6d7ec87b9c52732fc63fa0549e4824edc7d0514f47747fa315f1d075a"
+    "admin_password" : '9dfd55f332261da3404cfbae6425b52b5af48ea27ab26a1fc42868b458c285c0'
 }

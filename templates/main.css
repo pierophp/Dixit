@@ -136,7 +136,8 @@ h1 {
 
 #userTableOuter {
   overflow-y: auto;
-  max-height: 97px;
+  overflow-x: hidden;	
+  height: 97px;
 }
 
 #userTable {
@@ -153,7 +154,7 @@ h1 {
   position: fixed;
   top: 0;
   right: 0;
-  width: 350px;
+  width: 300px;
   z-index: 4;
 }
 
@@ -167,7 +168,7 @@ h1 {
 
 #chatLog {
   background-color: #EEE;
-  height: 200px;
+  height: 111px;
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 2px;
@@ -258,6 +259,7 @@ h1 {
 
 #gameTable {
   width: 100%;
+  font-size: 80%;
 }
 
 #gameTable th {
@@ -309,6 +311,7 @@ h1 {
   position: absolute;
   top: 60px;
   right: 380px;
+  zoom: 0.8;
 }
 
 #gameState {
@@ -510,6 +513,10 @@ h1 {
   cursor:crosshair;
 }
 
+#cards .card{
+  
+}
+
 .token {
   /* Transparent voting token */
   width: {{ display.Sizes.TOKEN }}px;
@@ -524,6 +531,7 @@ h1 {
 /* Toggleable hand display */
 
 #handContainer {
+/*	zoom: 0.7; */
   display: none;
   position: fixed;
   bottom: 0;
@@ -551,8 +559,9 @@ h1 {
 }
 
 .toggleHand {
+  font-size: 24px;
   width: {{ cards_per_person * (display.Sizes.CARD_WIDTH + 5)}}px;
-  height: 16px;
+  height: 42px;
   background-color: #666;
   cursor: pointer;
   color: #BBB;

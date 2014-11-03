@@ -58,3 +58,7 @@ class Users(object):
         self.users[uid] = user
         self.users_by_puid[puid] = user
         return user
+        
+	def get_user(self, uid):
+		del self.users[uid]
+

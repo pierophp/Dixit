@@ -7,34 +7,34 @@ var ALERT_TITLE = TITLE + ' (!)';
 var GAMELIST_INTERVAL = 10000;
 var USERLIST_INTERVAL = 20000;
 var CHATROOM_INTERVAL = 3000;
-var GAMEBOARD_INTERVAL = 4000;
+var GAMEBOARD_INTERVAL = 2000;
 
 
 // Summary of game state for an observer
 var observerMessages = [];
-observerMessages[{{ states.BEGIN }}] = 'Join the game!';
-observerMessages[{{ states.CLUE }}] = 'Creating a clue';
-observerMessages[{{ states.PLAY }}] = 'Playing cards';
-observerMessages[{{ states.VOTE }}] = 'Voting';
-observerMessages[{{ states.END }}] = 'Game over';
+observerMessages[{{ states.BEGIN }}] = 'Dołącz do gry!';
+observerMessages[{{ states.CLUE }}] = 'Tworzenie podpowiedzi';
+observerMessages[{{ states.PLAY }}] = 'Wybieranie kart';
+observerMessages[{{ states.VOTE }}] = 'Głosowanie';
+observerMessages[{{ states.END }}] = 'Koniec gry';
 
 
 // Summary of game state for a player who can take an action
 var actionMessages = [];
-actionMessages[{{ states.BEGIN }}] = 'Start the game once you have all players.';
-actionMessages[{{ states.CLUE }}] = 'Create a clue.<br />You can show/hide your hand at the bottom.';
-actionMessages[{{ states.PLAY }}] = 'Select the best card for the following clue.';
-actionMessages[{{ states.VOTE }}] = 'Vote for the card you think was selected by the clue maker, given their clue.';
-actionMessages[{{ states.END }}] = 'Play again?';
+actionMessages[{{ states.BEGIN }}] = 'Wystartuj grę gdy będziesz miał komplet graczy.';
+actionMessages[{{ states.CLUE }}] = 'Stwórz podpowieź.<br />Możesz pokazać/ukryć swoje karty na dole.';
+actionMessages[{{ states.PLAY }}] = 'Wybierz najlepszą kartę dla podpowiedzi.';
+actionMessages[{{ states.VOTE }}] = 'Zagłosuj na kartę, którą twoim zdaniem wskazał tworzący zagadkę.';
+actionMessages[{{ states.END }}] = 'Powtórka?';
 
 
 // Summary of game state for a player who needs to wait
 var waitingMessages = [];
-waitingMessages[{{ states.BEGIN }}] = 'Waiting for more players ...';
-waitingMessages[{{ states.CLUE }}] = 'Waiting for a clue to be made ...';
-waitingMessages[{{ states.PLAY }}] = 'Waiting for other players to select a card ...';
-waitingMessages[{{ states.VOTE }}] = 'Waiting for other players to vote ...';
-waitingMessages[{{ states.END }}] = 'Waiting for the next game ...';
+waitingMessages[{{ states.BEGIN }}] = 'Oczekiwanie na graczy...';
+waitingMessages[{{ states.CLUE }}] = 'Oczekiwanie na podpowiedź...';
+waitingMessages[{{ states.PLAY }}] = 'Oczekiwanie aż gracze wybiorą kartę...';
+waitingMessages[{{ states.VOTE }}] = 'Oczekiwanie aż gracze zagłosują...';
+waitingMessages[{{ states.END }}] = 'Oczekiwanie na kolejną grę...';
 
 
 // Bunny status icons to display beside names and games
@@ -46,10 +46,10 @@ function activityIcon(rel_last_active) {
     hours = Math.floor(minutes / 60);
     days = Math.floor(hours / 24);
     if (minutes == 0) {
-        var activity = 'Active right now';
+        var activity = 'Aktywny';
         var status = '{{ display.Images.ICON_ACTIVE }}';
     } else if (hours == 0) {
-        activity = 'Last active ' + minutes + ' minute' + pluralize(minutes) + ' ago';
+        activity = 'Ostatnio aktywny ' + minutes + ' minut temu';
         status = '{{ display.Images.ICON_AWAY }}';
     } else if (days == 0) {
         activity = 'Last active ' + hours + ' hour' + pluralize(hours) + ' ago';
@@ -83,7 +83,7 @@ $(document).ready(function() {
         $.getJSON('getgames', function(data) {
             var html = [];
             if (data.length > 0) {
-                html.push('<tr><th>&nbsp;</th><th>Host</th><th>Name</th><th>State</th><th>Players</th><th>Score</th><th>Cards<th><th>&nbsp;</th></tr>');
+                html.push('<tr><th>&nbsp;</th><th>Host</th><th>Nazwa</th><th>Stan</th><th><img class="smiley" src="static/images/smilies/Bunny.png" title="(gee)" ascii="(gee)"></th><th>Pkt</th><th>Karty<th><th>&nbsp;</th></tr>');
             }
             $.each(data, function(i, game) {
                 html.push('<tr class="' + (game.gid == activeGame ? 'activeGame' : 'visibleGame') + '">');
@@ -311,7 +311,7 @@ $(document).ready(function() {
 
             // Current Clue
             if (data.round.clue !== undefined) {
-                $('#clue').html('Clue: "' + smilify(data.round.clue) + '"').fadeIn();
+                $('#clue').html('Podpowiedź: "' + smilify(data.round.clue) + '"').fadeIn();
             } else {
                 $('#clue').hide();
             }
@@ -446,13 +446,13 @@ $(document).ready(function() {
             // Handler for when a card is clicked; sets up the actionForm appropriately
             $('#actionForm').data('cmd', cmd);
             if (cmd == {{ commands.CREATE_CLUE }}) {
-                $('#actionOk').val('Create');
+                $('#actionOk').val('Stwórz');
                 $('#actionClue').show().select();
             } else if (cmd == {{ commands.PLAY_CARD }}) {
-                $('#actionOk').val('Play');
+                $('#actionOk').val('Graj');
                 $('#actionClue').hide();
             } else if (cmd == {{ commands.CAST_VOTE }}) {
-                $('#actionOk').val('Vote');
+                $('#actionOk').val('Głosuj');
                 $('#actionClue').hide();
             }
             $('#cardId').val($(this).attr('id'));
@@ -521,7 +521,7 @@ $(document).ready(function() {
     $('#username').editable('setusername', {
         name : 'username',
         width : '200',
-        tooltip : 'Click to change your name',
+        tooltip : 'Kliknij aby zmienić nick',
         callback : function(value, settings) {
             refreshGameList();
             refreshUserList();
@@ -566,6 +566,9 @@ $(document).ready(function() {
     $('#actionOk').button();
     $('#createOk').button();
     $('#gameStateContainer').draggable();
+	$( "#chatRoomContainer" ).resizable({ alsoResize: "#chatLog", ghost: "true" });
+    $( "#userTableOuter" ).resizable({alsoResize: "#userTable", ghost: "true" });
+	$( "#chatRoomContainer" ).draggable();
 
 
     // Chat smiley list

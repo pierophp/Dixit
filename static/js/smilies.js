@@ -69,6 +69,8 @@ var smileys = {
     '(gtfo)' : 'Middle-Finger',
     '(loser)' : 'Loser',
     '(winner)' : 'Win',
+    '(cebula)' : 'Onion',
+    '(bula)' : 'bulka',
 };
 
 
