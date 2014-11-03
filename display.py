@@ -62,8 +62,9 @@ class BunnyPalette(object):
     SILVER  = 'd3ceca'
     BLACK  = '3a363b'
     WHITE  = 'FFFFFF'
-    LIME   = '#03FF00'
+    LIME   = '03FF00'
     SKY    = '00E7FF'
+    RAINBOW= 'rainbow'
 
     @classmethod
     def is_colour(cls, cid):
@@ -71,4 +72,4 @@ class BunnyPalette(object):
         return cid in (cls.RED, cls.ORANGE, cls.YELLOW,
                        cls.GREEN, cls.BLUE, cls.PURPLE,
                        cls.PINK, cls.SILVER, cls.BLACK,
-                       cls.WHITE, cls.LIME, cls.SKY)
+                       cls.WHITE, cls.LIME, cls.SKY, cls.RAINBOW)
