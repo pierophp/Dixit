@@ -174,6 +174,7 @@ $(document).ready(function() {
                 $('#chatLog').animate({ scrollTop: chatLog.prop('scrollHeight') }, "slow");
                 if (!document.hasFocus()) {
                     document.title = ALERT_TITLE;
+                    //$('audio').play();
                 }
             }
         }).always(function() {
@@ -307,6 +308,7 @@ $(document).ready(function() {
                 $('#gameState').html(actionMessages[data.state]);
                 if (!document.hasFocus()) {
                     document.title = ALERT_TITLE;
+                    $('audio')[0].play();
                 }
             } else {
                 $('#gameState').html(waitingMessages[data.state]);

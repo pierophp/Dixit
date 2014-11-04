@@ -111,17 +111,44 @@
 
     <div id="bunnyPalette">
         <h1>Wybierz kolor</h1>
-        <table cellpadding="0" cellspacing="0" border="0">
-            {% for row in ((display.BunnyPalette.RED, display.BunnyPalette.ORANGE, display.BunnyPalette.YELLOW), (display.BunnyPalette.GREEN, display.BunnyPalette.BLUE, display.BunnyPalette.PURPLE), (display.BunnyPalette.PINK, display.BunnyPalette.SILVER, display.BunnyPalette.BLACK), (display.BunnyPalette.WHITE, display.BunnyPalette.LIME, display.BunnyPalette.SKY)) %}
-            <tr>
-            {% for colour in row %}
-            <td><div class="joinGame bunnyPicker" id="{{ colour }}" style="background-color:#{{ colour }}"><img src="{{ display.Images.BUNNY_READY }}" /></div></td>
-            {% end %}
-            </tr>
-            {% end %}
-            <tr><td><div class="joinGame bunnyPicker rainbow" id="rainbow"><img src="{{ display.Images.BUNNY_READY }}" /></div></td></tr>
-            
-        </table>
+<table cellpadding="0" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td><div class="joinGame bunnyPicker clickable" id="c52828" style="background-color:#c52828"><img src="static/images/bunnyready.png"></div></td>
+
+<td><div class="joinGame bunnyPicker bunnyTaken" id="e59100" style="background-color:#e59100"><img src="static/images/bunnyready.png"></div></td>
+
+<td><div class="joinGame bunnyPicker clickable" id="e2e05d" style="background-color:#e2e05d"><img src="static/images/bunnyready.png"></div></td>
+
+<td><div class="joinGame bunnyPicker clickable" id="12751b" style="background-color:#12751b"><img src="static/images/bunnyready.png"></div></td>
+
+</tr>
+
+<tr>
+
+<td><div class="joinGame bunnyPicker clickable" id="a41bf3" style="background-color:#a41bf3"><img src="static/images/bunnyready.png"></div></td>
+
+<td><div class="joinGame bunnyPicker clickable" id="d2638d" style="background-color:#d2638d"><img src="static/images/bunnyready.png"></div></td>
+
+<td><div class="joinGame bunnyPicker clickable" id="d3ceca" style="background-color:#d3ceca"><img src="static/images/bunnyready.png"></div></td>
+
+<td><div class="joinGame bunnyPicker bunnyTaken" id="3a363b" style="background-color:#3a363b"><img src="static/images/bunnyready.png"></div></td>
+
+</tr>
+
+<tr>
+
+<td><div class="joinGame bunnyPicker clickable" id="FFFFFF" style="background-color:#FFFFFF"><img src="static/images/bunnyready.png"></div></td>
+
+<td><div class="joinGame bunnyPicker clickable" id="03FF00" style="background-color:#03FF00"><img src="static/images/bunnyready.png"></div></td>
+
+<td><div class="joinGame bunnyPicker clickable" id="00E7FF" style="background-color:#00E7FF"><img src="static/images/bunnyready.png"></div></td>
+
+<td><div class="joinGame bunnyPicker rainbow clickable" id="rainbow"><img src="static/images/bunnyready.png"></div></td>
+
+</tr>
+</tbody></table>
     </div>
 
     <div id="startGameContainer">
@@ -153,5 +180,10 @@
         </form>
     </div>
 </div>
+
+<audio>
+	<source src="http://havalite.com/experiment/jsound/rattle.mp3" type="audio/mpeg">
+	Your browser isn't invited for super fun audio time.
+</audio>
 
 {% end %}
