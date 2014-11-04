@@ -386,6 +386,12 @@ h1 {
 
 
 /* Scoreboard for currently selected game */
+#scoreBoardContainer{
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 100px;
+	
+}
 
 #scoreBoard {
   border-width: 1px 0 1px 0;

@@ -590,6 +590,9 @@ $(document).ready(function() {
 	$( "#chatRoomContainer" ).resizable({ alsoResize: "#chatLog", ghost: "true" });
     $( "#userTableOuter" ).resizable({alsoResize: "#userTable", ghost: "true" });
 	$( "#chatRoomContainer" ).draggable();
+	$( "#chatRoomContainer" ).draggable();
+	$( "#scoreBoardContainer" ).resizable();
+	
 
 
     // Chat smiley list
