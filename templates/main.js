@@ -354,15 +354,27 @@ $(document).ready(function() {
                         var card = $('#' + cid);
                         var randomLeft = Math.ceil(card.position().left + Math.random() * {{ display.Sizes.CARD_WIDTH - display.Sizes.TOKEN }});
                         var randomTop = Math.ceil(card.offset().top + Math.random() * {{ display.Sizes.CARD_HEIGHT - display.Sizes.TOKEN }});
-                        card.append('<div class="token" title="' + textToHtml(data.players[puid])
+                        if(data.colours[puid] == 'rainbow'){
+							card.append('<div class="token rainbow" title="rainbow'
                                   + '" style="left:' + randomLeft + 'px;top:' + randomTop
-                                  + 'px;background-color:#' + data.colours[puid] + '">&nbsp;</div>');
+                                  + 'px;">&nbsp;</div>');
+						}else{
+							card.append('<div class="token" title="' + textToHtml(data.players[puid])
+                            + '" style="left:' + randomLeft + 'px;top:' + randomTop
+                            + 'px;background-color:#' + data.colours[puid] + '">&nbsp;</div>');
+						}
                     });
                     $('.token').fadeIn();
                     $.each(data.round.owners, function(puid, cid) {
                         var card = $('#' + cid);
-                        card.css({'background-color' : '#' + data.colours[puid],
-                                  'border-color' : '#' + data.colours[puid]});
+                        
+                        if(data.colours[puid] == 'rainbow'){
+							card.addClass("rainbow");
+						}else{
+							card.css({'background-color' : '#' + data.colours[puid],
+									  'border-color' : '#' + data.colours[puid]});
+						}
+						
                         if (puid != data.round.clueMaker) {
                             card.find('.small').fadeTo(400, 0.1);
                         }
