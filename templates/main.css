@@ -332,6 +332,7 @@ h1 {
   top: 60px;
   right: 380px;
   zoom: 0.8;
+  z-index: 1;
 }
 
 #gameState {
