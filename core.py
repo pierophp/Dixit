@@ -216,6 +216,7 @@ class Game(object):
         self.players.pop(user)
         turn = self.order.index(user)
         self.order.remove(user)
+        del self.colours[user]
         # Readjust turn in case game is currently running
         if self.turn > turn:
             self.turn -= 1
