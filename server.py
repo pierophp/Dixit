@@ -15,6 +15,7 @@ import os
 import sys
 import time
 import datetime
+import utils
 
 from chat import ChatLog
 from codes import APIError, Codes
@@ -87,7 +88,7 @@ class AdminHandler(RequestHandler):
         self.render('admin.html', display=display)
 
     def post(self):
-        admin_password = self.get_argument('password')
+        admin_password = utils.hash_obj(self.get_argument('password'))
         if admin_password != self.application.admin_password:
             stdout = ''
             stderr = 'Invalid password'
