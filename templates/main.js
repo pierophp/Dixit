@@ -357,7 +357,7 @@ $(document).ready(function() {
                         var randomLeft = Math.ceil(card.position().left + Math.random() * {{ display.Sizes.CARD_WIDTH - display.Sizes.TOKEN }});
                         var randomTop = Math.ceil(card.offset().top + Math.random() * {{ display.Sizes.CARD_HEIGHT - display.Sizes.TOKEN }});
                         if(data.colours[puid] == 'rainbow'){
-							card.append('<div class="token rainbow" title="rainbow'
+							card.append('<div class="token rainbow" title="' + textToHtml(data.players[puid])
                                   + '" style="left:' + randomLeft + 'px;top:' + randomTop
                                   + 'px;">&nbsp;</div>');
 						}else{
