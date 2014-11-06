@@ -61,6 +61,21 @@ function activityIcon(rel_last_active) {
     return '<img src="' + status + '" title="' + activity + '" />';
 }
 
+function activity(rel_last_active) {
+    minutes = Math.floor(rel_last_active / 60);
+    hours = Math.floor(minutes / 60);
+    days = Math.floor(hours / 24);
+    if (minutes == 0) {
+        return true;
+    } else if (hours == 0) {
+        return true;
+    } else if (days == 0) {
+        return false;
+    }else{
+        return false;
+    }
+}
+
 
 // Rendering plain text in HTML (with smilies.js)
 function smilify(text) {
@@ -82,14 +97,12 @@ $(document).ready(function() {
     var gameListWorker = function worker() {
         $.getJSON('getgames', function(data) {
             var html = [];
-            if (data.length > 0) {
+            if (data.length > 0 && activity(data[0].relLastActive)) {
                 html.push('<tr><th>&nbsp;</th><th>Host</th><th>Nazwa</th><th>Stan</th><th><img class="smiley" src="static/images/smilies/Bunny.png" title="(gee)" ascii="(gee)"></th><th>Pkt</th><th>Karty<th><th>&nbsp;</th></tr>');
             }
 
-            var licznik = 1;
             $.each(data, function(i, game) {
-                if(licznik <= 3){
-                    console.log(licznik + "\n");
+                if(activity(game.relLastActive)){
                     html.push('<tr class="' + (game.gid == activeGame ? 'activeGame' : 'visibleGame') + '">');
                     html.push('<td class="firstCell">' + activityIcon(game.relLastActive) + '</td>');
                     html.push('<td><input type="hidden" name="gid" value="' + game.gid + '" />'
@@ -103,9 +116,6 @@ $(document).ready(function() {
                     html.push('<td class="lastCell" title="' + game.deckName + '">'
                             + game.left + ' / ' + game.size + '</td>');
                     html.push('</tr>');
-
-                    licznik++;
-
                 }
             });
             $('#gameTable').html(html.join(''));
@@ -131,11 +141,23 @@ $(document).ready(function() {
     var userListWorker = function worker() {
         $.getJSON('getusers', function(data) {
             var html = [];
+
+            function compare(a,b) {
+              if (a.name < b.name)
+                 return -1;
+              if (a.name > b.name)
+                return 1;
+              return 0;
+            }
+            data.sort(compare);
+            console.log(data);
             $.each(data, function(i, user) {
-                html.push('<tr>');
-                html.push('<td class="bunnyIcon">' + activityIcon(user.relLastActive) + '</td>');
-                html.push('<td>' + smilify(user.name) + '</td>');
-                html.push('</tr>');
+                if(activity(user.relLastActive)){
+                    html.push('<tr>');
+                    html.push('<td class="bunnyIcon">' + activityIcon(user.relLastActive) + '</td>');
+                    html.push('<td>' + smilify(user.name) + '</td>');
+                    html.push('</tr>');
+                }
             });
             $('#userTable').html(html.join(''));
         }).always(function() {
