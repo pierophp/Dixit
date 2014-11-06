@@ -85,20 +85,28 @@ $(document).ready(function() {
             if (data.length > 0) {
                 html.push('<tr><th>&nbsp;</th><th>Host</th><th>Nazwa</th><th>Stan</th><th><img class="smiley" src="static/images/smilies/Bunny.png" title="(gee)" ascii="(gee)"></th><th>Pkt</th><th>Karty<th><th>&nbsp;</th></tr>');
             }
+
+            var licznik = 1;
             $.each(data, function(i, game) {
-                html.push('<tr class="' + (game.gid == activeGame ? 'activeGame' : 'visibleGame') + '">');
-                html.push('<td class="firstCell">' + activityIcon(game.relLastActive) + '</td>');
-                html.push('<td><input type="hidden" name="gid" value="' + game.gid + '" />'
-                        + smilify(game.host) + '</td>');
-                html.push('<td>' + smilify(game.name) + '</td>');
-                html.push('<td>' + observerMessages[game.state] + '</td>');
-                html.push('<td title="' + textToHtml(game.players.join(', ')) + '">'
-                        + game.players.length
-                        + (game.state == {{ states.BEGIN }} ? ' / ' + game.maxPlayers : '') + '</td>');
-                html.push('<td>' + game.topScore + (game.maxScore ? ' / ' + game.maxScore : '') + '</td>');
-                html.push('<td class="lastCell" title="' + game.deckName + '">'
-                        + game.left + ' / ' + game.size + '</td>');
-                html.push('</tr>');
+                if(licznik <= 3){
+                    console.log(licznik + "\n");
+                    html.push('<tr class="' + (game.gid == activeGame ? 'activeGame' : 'visibleGame') + '">');
+                    html.push('<td class="firstCell">' + activityIcon(game.relLastActive) + '</td>');
+                    html.push('<td><input type="hidden" name="gid" value="' + game.gid + '" />'
+                            + smilify(game.host) + '</td>');
+                    html.push('<td>' + smilify(game.name) + '</td>');
+                    html.push('<td>' + observerMessages[game.state] + '</td>');
+                    html.push('<td title="' + textToHtml(game.players.join(', ')) + '">'
+                            + game.players.length
+                            + (game.state == {{ states.BEGIN }} ? ' / ' + game.maxPlayers : '') + '</td>');
+                    html.push('<td>' + game.topScore + (game.maxScore ? ' / ' + game.maxScore : '') + '</td>');
+                    html.push('<td class="lastCell" title="' + game.deckName + '">'
+                            + game.left + ' / ' + game.size + '</td>');
+                    html.push('</tr>');
+
+                    licznik++;
+
+                }
             });
             $('#gameTable').html(html.join(''));
 
