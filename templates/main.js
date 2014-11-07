@@ -150,7 +150,6 @@ $(document).ready(function() {
               return 0;
             }
             data.sort(compare);
-            console.log(data);
             $.each(data, function(i, user) {
                 if(activity(user.relLastActive)){
                     html.push('<tr>');
@@ -623,9 +622,21 @@ $(document).ready(function() {
     $( "#userTableOuter" ).resizable({alsoResize: "#userTable", ghost: "true" });
 	$( "#chatRoomContainer" ).draggable();
 	$( "#chatRoomContainer" ).draggable();
-	$( "#scoreBoardContainer" ).resizable();
-	
 
+    function resizeFix(event, ui) {
+        var y = ui.size.height/ui.originalSize.height;
+        var x = y;
+
+        //$( "#scoreBoardContainer" ).hide();
+        //$( "#scoreBoard" ).css("-ms-transform", "scale("+x+","+y+")");
+        //$( "#scoreBoard" ).css("-webkit-transform", "scale("+x+","+y+")");
+        //$( "#scoreBoard" ).css("transform", "scale("+x+","+y+")");
+        $( "#scoreBoard" ).css("zoom", y);
+    }
+
+    $( "#scoreBoardContainer" ).resizable({
+        resize: resizeFix
+    });
 
     // Chat smiley list
     var smileyList = [];
