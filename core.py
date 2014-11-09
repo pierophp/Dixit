@@ -3,7 +3,6 @@
 from collections import defaultdict
 import random
 import time
-import datetime
 
 from codes import APIError, Codes
 from deck import Deck
@@ -305,11 +304,11 @@ class Game(object):
                     self.state = States.END
                     f = open('scores/'+p.user.uid, 'a')
                     f.write(str(p.score+5)+"\n")
-                    f.close();
+                    f.close()
                 else:
                     f = open('scores/'+p.user.uid, 'a')
                     f.write(str(p.score)+"\n")
-                    f.close();
+                    f.close()
 
         self.ping()
 
