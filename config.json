@@ -9,16 +9,8 @@
         "Arvoelke" : ["arvoelke", false],
         "Anonim" : ["anonim", false],
         "Antros 1" : ["antros", false],
-        "Antros 2" : ["antros2", false],
-        "Antros 3" : ["antros3", false],
-        "Antros 4" : ["antros4", false],
         "Damiinho 1" : ["daminio", false],
-        "Damiinho 2" : ["daminio2", false],
-        "Damiinho 3" : ["daminio3", false],
-        "Wielkanoc" : ["wielkanoc", false],
-        "Choinka" : ["wielkanoc2", false],
-        "Kasia" : ["wielkanoc3", false],
-        "Buła" : ["wielkanoc4", false]
+        "Wielkanoc" : ["wielkanoc", false]
     },
 
     // utils.hash_obj() of password for /admin/ page
