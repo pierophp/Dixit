@@ -71,6 +71,7 @@ var smileys = {
     '(winner)' : 'Win',
     '(cebula)' : 'Onion',
     '(bula)' : 'bulka',
+    '(lama)' : 'lama'
 };
 
 
