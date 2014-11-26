@@ -210,8 +210,8 @@ class Game(object):
         if len(self.players) <= Limits.MIN_PLAYERS and \
            self.state != States.BEGIN:
             raise APIError(Codes.NOT_ENOUGH_PLAYERS)
-        if self.state in (States.PLAY, States.VOTE):
-            raise APIError(Codes.KICK_BAD_STATE)
+        #if self.state in (States.PLAY, States.VOTE):
+        #    raise APIError(Codes.KICK_BAD_STATE)
         self.players.pop(user)
         turn = self.order.index(user)
         self.order.remove(user)
