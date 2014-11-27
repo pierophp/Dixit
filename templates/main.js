@@ -22,10 +22,10 @@ observerMessages[{{ states.END }}] = 'Koniec gry';
 // Summary of game state for a player who can take an action
 var actionMessages = [];
 actionMessages[{{ states.BEGIN }}] = 'Wystartuj grę gdy będziesz miał komplet graczy.';
-actionMessages[{{ states.CLUE }}] = 'Stwórz podpowieź.<br />Możesz pokazać/ukryć swoje karty na dole.';
-actionMessages[{{ states.PLAY }}] = 'Wybierz najlepszą kartę dla podpowiedzi.';
-actionMessages[{{ states.VOTE }}] = 'Zagłosuj na kartę, którą twoim zdaniem wskazał tworzący zagadkę.';
-actionMessages[{{ states.END }}] = 'Powtórka?';
+actionMessages[{{ states.CLUE }}] = 'Wybierz kartę i wpisz jakieś hasło które innym graczom będzie pasowało do tej karty.';
+actionMessages[{{ states.PLAY }}] = 'Wybierz kartę która innym będzie pasowała do wskazanego hasła.';
+actionMessages[{{ states.VOTE }}] = 'Wybierz kartę, którą twoim zdaniem wskazał tworzący zagadkę.';
+actionMessages[{{ states.END }}] = 'To może jeszcze ostatnią?';
 
 
 // Summary of game state for a player who needs to wait
