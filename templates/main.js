@@ -461,6 +461,8 @@ $(document).ready(function() {
                         window.last_time = parseInt(new Date().getTime()/1000);
                     }
                 }
+            }else{
+                window.time = 0;
             }
 
 
