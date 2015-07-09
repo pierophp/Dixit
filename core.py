@@ -149,7 +149,7 @@ class Game(object):
     SCORE_FOR_CORRECT = 3
 
     def __init__(self, host, card_sets, password, name, max_players,
-                 max_score, max_clue_length):
+                 max_score, max_clue_length, auto):
         """Initializes the game with the parameters from CreateHandler."""
         self.host = host
         self.deck = Deck(card_sets)
@@ -158,6 +158,7 @@ class Game(object):
         self.max_players = max_players
         self.max_score = max_score
         self.max_clue_length = max_clue_length
+        self.auto = auto
 
         self.players = {}
         self.order = []

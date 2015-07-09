@@ -58,6 +58,15 @@
                             min="{{ limits.MIN_CLUE_LENGTH }}" max="{{ limits.MAX_CLUE_LENGTH }}" size="4" required /></td>
             </tr>
             <tr>
+                <td><label>Automatyczne dokładanie kart</label></td>
+                <td>
+                    <input type="radio" name="auto" value="1" checked> Tak
+                    <br>
+                    <input type="radio" name="auto" value="0"> Nie
+                </td>
+
+            </tr>
+            <tr>
                 <td><label>Wybierz talie</label></td>
                 <td>
                     {% for i, card_set in enumerate(card_sets) %}

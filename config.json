@@ -8,9 +8,12 @@
         "Dixit" : ["dixit", true],
         "Arvoelke" : ["arvoelke", false],
         "Anonim" : ["anonim", false],
-        "Antros 1" : ["antros", false],
-        "Damiinho 1" : ["daminio", false],
-        "Wielkanoc" : ["wielkanoc", false]
+        "Antros" : ["antros", false],
+        "Damiinho" : ["daminio", false],
+        "Wielkanoc" : ["wielkanoc", false],
+        "WoziKusza" : ["wozi", false],
+        "BulaXXX" : ["bula", false],
+        "NamaXXX" : ["nama", false]
     },
 
     // utils.hash_obj() of password for /admin/ page

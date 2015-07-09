@@ -152,8 +152,12 @@ class CreateHandler(RequestHandler):
            (not Limits.MIN_CLUE_LENGTH <= max_clue_length <= Limits.MAX_CLUE_LENGTH):
             raise APIError(Codes.ILLEGAL_RANGE)
 
+        auto = self.get_argument('auto')
+        if not auto:
+            auto = 0
+
         game = Game(self.user, card_sets, password, name,
-                    max_players, max_score, max_clue_length)
+                    max_players, max_score, max_clue_length, self.get_argument('auto'))
         self.application.games.append(game)
         self.write(str(len(self.application.games) - 1))
 
@@ -175,6 +179,7 @@ class GetGamesHandler(RequestHandler):
                 'state' : game.state,
                 'left' : game.deck.left(),
                 'size' : game.deck.size(),
+                'auto' : game.auto,
                 'topScore' : max(p.score for p in game.players.values()) \
                     if game.players else 0,
                 'maxScore' : game.max_score \
@@ -307,6 +312,7 @@ class GameHandler(RequestHandler):
 
         blob = {
             'name' : game.name,
+            'auto' : game.auto,
             'user' : user.puid,
             'host' : game.host.puid,
             'players' : players,

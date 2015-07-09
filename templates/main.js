@@ -113,8 +113,9 @@ $(document).ready(function() {
                             + game.players.length
                             + (game.state == {{ states.BEGIN }} ? ' / ' + game.maxPlayers : '') + '</td>');
                     html.push('<td>' + game.topScore + (game.maxScore ? ' / ' + game.maxScore : '') + '</td>');
-                    html.push('<td class="lastCell" title="' + game.deckName + '">'
+                    html.push('<td title="' + game.deckName + '">'
                             + game.left + ' / ' + game.size + '</td>');
+                    html.push('<td id="timeCell" class="lastCell"> ' + window.time + '</td>');
                     html.push('</tr>');
                 }
             });
@@ -238,6 +239,7 @@ $(document).ready(function() {
         sendCommand({{ commands.GET_BOARD }}, null, function(data) {
             var numPlayers = data.order.length;
             var clueMaker = data.order[data.turn];
+            window.auto = parseInt(data.auto);
 
             // Colour picker / game joiner
             if (data.state == {{ states.BEGIN }} && numPlayers < data.maxPlayers) {
@@ -272,9 +274,9 @@ $(document).ready(function() {
 
                 // Name of player and option to kick them if host
                 var canKick = data.isHost
-                           && (data.state == {{ states.BEGIN }} || numPlayers > {{ limits.MIN_PLAYERS }});
-                           //&& data.state != {{ states.PLAY }}
-                           //&& data.state != {{ states.VOTE }};
+                           && (data.state == {{ states.BEGIN }} || numPlayers > {{ limits.MIN_PLAYERS }})
+                           && data.state != {{ states.PLAY }}
+                           && data.state != {{ states.VOTE }};
                 scoreBoard.push('<td class="player">'
                               + (canKick ? '[<a class="kickPlayer" href="#" title="Kick Player" id="' + puid + '">x</a>] ' : '')
                               + '<span style="' + (puid == data.user ? 'font-weight:bold' : '') + '">'
@@ -414,16 +416,76 @@ $(document).ready(function() {
                 }
             }
 
+            function timer(){
+                return window.timer = setTimeout(function () {
+                            if(window.last_time !== null){
+                                window.time = parseInt(new Date().getTime()/1000) - window.last_time;
+                                $('#timeCell').text(window.time);
+                                timer();
+                            }
+                        }, 600);
+            }
+
+            function randomClue(){
+                $('#' + $($('#hand .card')[0]).attr('id')).click();
+                $('#actionClue').val('LUBIĘ PENISY I ZMUSZAM INNYCH DO CZEKANIA!');
+                $('#actionOk').click();
+            }
+
+            function randomHandCard(){
+                $('#' + $($('#hand .card')[0]).attr('id')).click();
+                $('#actionOk').click();
+            };
+
+            function randomVoteCard(){
+                $('#' + $($('#cards .card')[0]).attr('id')).click();
+                $('#actionOk').click();
+            }
+
+            if(window.auto == 1) {
+                if (data.state != window.last_state) {
+                    window.last_state = data.state;
+
+                    window.zmiana = true;
+
+                    window.last_time = null;
+                    window.time = 0;
+
+                    window.timer = null;
+                } else {
+                    window.zmiana = false;
+
+                    if (window.timer == null) {
+                        window.timer = timer();
+
+                        window.last_time = parseInt(new Date().getTime()/1000);
+                    }
+                }
+            }
+
+
             // Bind/unbind state-dependent click handlers to all cards
             if (data.state == {{ states.CLUE }} && clueMaker == data.user) {
                 $('#cards .card').unbind('click').removeClass('clickable');
                 $('#hand .card').click(setupActionFormHandler({{ commands.CREATE_CLUE }})).addClass('clickable');
+
+                if(window.time >= 60){
+                    randomClue();
+                }
             } else if (data.state == {{ states.PLAY }} && data.requiresAction[data.user]) {
                 $('#cards .card').unbind('click').removeClass('clickable');
                 $('#hand .card').click(setupActionFormHandler({{ commands.PLAY_CARD }})).addClass('clickable');
+
+                if(window.time >= 30) {
+                    randomHandCard();
+                }
             } else if (data.state == {{ states.VOTE }} && data.requiresAction[data.user]) {
                 $('#hand .card').unbind('click').removeClass('clickable');
                 $('#cards .card').click(setupActionFormHandler({{ commands.CAST_VOTE }})).addClass('clickable');
+
+                if(window.time >= 30) {
+                    randomVoteCard();
+                }
             } else {
                 $('.card').unbind('click').removeClass('clickable');
             }
