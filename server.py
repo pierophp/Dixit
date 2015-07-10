@@ -157,7 +157,8 @@ class CreateHandler(RequestHandler):
             auto = 0
 
         game = Game(self.user, card_sets, password, name,
-                    max_players, max_score, max_clue_length, self.get_argument('auto'))
+                    max_players, max_score, max_clue_length,
+                    int(self.get_argument('auto')), int(self.get_argument('time_clue')), int(self.get_argument('time_choose')), int(self.get_argument('time_vote')))
         self.application.games.append(game)
         self.write(str(len(self.application.games) - 1))
 
@@ -332,6 +333,9 @@ class GameHandler(RequestHandler):
             'requiresAction' : requires_action,
             'round' : rnd,
             'player' : plr,
+            'time_clue' : game.time_clue,
+            'time_choose' : game.time_choose,
+            'time_vote' : game.time_vote
         }
 
         return blob

@@ -91,7 +91,7 @@ $(document).ready(function() {
     var cardsHash = undefined;  // hash of most recently rendered current cards, or undefined
     var votesHash = undefined;  // hash of most recently revealed votes, or undefined
     var lastChatUpdate = 0;  // timestamp of most recently retrieved message
-
+    window.time = 0;
 
     // Periodic Game List Polling
     var gameListWorker = function worker() {
@@ -240,6 +240,9 @@ $(document).ready(function() {
             var numPlayers = data.order.length;
             var clueMaker = data.order[data.turn];
             window.auto = parseInt(data.auto);
+            window.time_vote = parseInt(data.time_vote);
+            window.time_choose = parseInt(data.time_choose);
+            window.time_clue = parseInt(data.time_clue);
 
             // Colour picker / game joiner
             if (data.state == {{ states.BEGIN }} && numPlayers < data.maxPlayers) {
@@ -471,21 +474,21 @@ $(document).ready(function() {
                 $('#cards .card').unbind('click').removeClass('clickable');
                 $('#hand .card').click(setupActionFormHandler({{ commands.CREATE_CLUE }})).addClass('clickable');
 
-                if(window.time >= 60){
+                if(window.time >= window.time_clue){
                     randomClue();
                 }
             } else if (data.state == {{ states.PLAY }} && data.requiresAction[data.user]) {
                 $('#cards .card').unbind('click').removeClass('clickable');
                 $('#hand .card').click(setupActionFormHandler({{ commands.PLAY_CARD }})).addClass('clickable');
 
-                if(window.time >= 30) {
+                if(window.time >= window.time_choose) {
                     randomHandCard();
                 }
             } else if (data.state == {{ states.VOTE }} && data.requiresAction[data.user]) {
                 $('#hand .card').unbind('click').removeClass('clickable');
                 $('#cards .card').click(setupActionFormHandler({{ commands.CAST_VOTE }})).addClass('clickable');
 
-                if(window.time >= 30) {
+                if(window.time >= window.time_vote) {
                     randomVoteCard();
                 }
             } else {

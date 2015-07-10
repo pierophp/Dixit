@@ -6,7 +6,7 @@
     "card_sets" : {
         // <name-of-card-set> : [static/cards/<folder>, <is-default-checked>]
         "Dixit" : ["dixit", true],
-        "Arvoelke" : ["arvoelke", false],
+        "Arvoelke" : ["arvoelke", true],
         "Anonim" : ["anonim", false],
         "Antros" : ["antros", false],
         "Damiinho" : ["daminio", false],
