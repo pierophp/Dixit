@@ -13,7 +13,8 @@
         "Wielkanoc" : ["wielkanoc", false],
         "WoziKusza" : ["wozi", false],
         "BulaXXX" : ["bula", false],
-        "NamaXXX" : ["nama", false]
+        "NamaXXX" : ["namaxxx", false],
+        "Nama" : ["nama", false]
     },
 
     // utils.hash_obj() of password for /admin/ page
