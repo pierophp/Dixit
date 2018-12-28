@@ -3,15 +3,9 @@
 
     "card_sets" : {
         "Dixit" : ["dixit", true],
-        "Arvoelke" : ["arvoelke", true],
-        "Anonim" : ["anonim", false],
         "Antros" : ["antros", false],
         "Damiinho" : ["daminio", false],
-        "Wielkanoc" : ["wielkanoc", false],
-        "WoziKusza" : ["wozi", false],
-        "BulaXXX" : ["bula", false],
-        "NamaXXX" : ["namaxxx", false],
-        "Nama" : ["nama", false]
+        "Wielkanoc" : ["wielkanoc", false]
     },
 
     "admin_password" : ""
