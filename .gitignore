@@ -1,3 +1,4 @@
+static/cards/*
 .idea
 server.log
 *.pyc
