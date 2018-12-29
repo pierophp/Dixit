@@ -2,10 +2,16 @@
     "port" : 4660,
 
     "card_sets" : {
+        "Arvoelke" : ["arvoelke", true],
         "Dixit" : ["dixit", true],
+        "Anonim1133" : ["anonim", false],
         "Antros" : ["antros", false],
+        "Buła" : ["bula", false],
         "Damiinho" : ["daminio", false],
-        "Wielkanoc" : ["wielkanoc", false]
+        "Nama" : ["nama", false],
+        "Nama XXX" : ["namaxxx", false],
+        "Wielkanoc" : ["wielkanoc", false],
+        "Wozikusza" : ["wozi", false]
     },
 
     "admin_password" : ""
