@@ -568,7 +568,7 @@ $(document).ready(function() {
                 $('#actionOk').val('Criar');
                 $('#actionClue').show().select();
             } else if (cmd == {{ commands.PLAY_CARD }}) {
-                $('#actionOk').val('Mostrar');
+                $('#actionOk').val('Escolher');
                 $('#actionClue').hide();
             } else if (cmd == {{ commands.CAST_VOTE }}) {
                 $('#actionOk').val('Votar');
