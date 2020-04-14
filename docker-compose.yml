@@ -1,6 +1,7 @@
-version: '2'
+version: "2"
 services:
   dixit:
+    container_name: dixit
     build: .
     volumes:
       - .:/app:cached
