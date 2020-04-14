@@ -356,7 +356,7 @@ $(document).ready(function() {
 
             // Current Clue
             if (data.round.clue !== undefined) {
-                $('#clue').html('Podpowiedź: "' + smilify(data.round.clue) + '"').fadeIn();
+                $('#clue').html('Pista: "' + smilify(data.round.clue) + '"').fadeIn();
             } else {
                 $('#clue').hide();
             }
