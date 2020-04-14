@@ -134,7 +134,7 @@ class CreateHandler(RequestHandler):
             password = hash_obj(password)
         name = self.get_argument('name', '')
         if not name:
-            name = 'Gra %d' % (len(self.application.games) + 1)
+            name = 'Jogo %d' % (len(self.application.games) + 1)
 
         max_score = self.get_argument('max_score')
         if not max_score:
