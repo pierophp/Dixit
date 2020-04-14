@@ -7,7 +7,7 @@ class Labels(object):
     """Text labels."""
 
     TITLE = 'Dixit'
-    NEW_GAME = 'Nowa gra'
+    NEW_GAME = 'Novo jogo'
     DEFAULT_TEXT = ''
 
 

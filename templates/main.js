@@ -12,29 +12,29 @@ var GAMEBOARD_INTERVAL = 2000;
 
 // Summary of game state for an observer
 var observerMessages = [];
-observerMessages[{{ states.BEGIN }}] = 'Dołącz do gry!';
-observerMessages[{{ states.CLUE }}] = 'Tworzenie podpowiedzi';
-observerMessages[{{ states.PLAY }}] = 'Wybieranie kart';
-observerMessages[{{ states.VOTE }}] = 'Głosowanie';
-observerMessages[{{ states.END }}] = 'Koniec gry';
+observerMessages[{{ states.BEGIN }}] = 'Entre no jogo!';
+observerMessages[{{ states.CLUE }}] = 'Criando pista';
+observerMessages[{{ states.PLAY }}] = 'Selecionando cartas';
+observerMessages[{{ states.VOTE }}] = 'Votando';
+observerMessages[{{ states.END }}] = 'Fim do jogo';
 
 
 // Summary of game state for a player who can take an action
 var actionMessages = [];
-actionMessages[{{ states.BEGIN }}] = 'Wystartuj grę gdy będziesz miał komplet graczy.';
-actionMessages[{{ states.CLUE }}] = 'Wybierz kartę i wpisz jakieś hasło które innym graczom będzie pasowało do tej karty.';
-actionMessages[{{ states.PLAY }}] = 'Wybierz kartę która innym będzie pasowała do wskazanego hasła.';
-actionMessages[{{ states.VOTE }}] = 'Wybierz kartę, którą twoim zdaniem wskazał tworzący zagadkę.';
-actionMessages[{{ states.END }}] = 'To może jeszcze ostatnią?';
+actionMessages[{{ states.BEGIN }}] = 'Comece o jogo quando você tiver um conjunto de jogadores.';
+actionMessages[{{ states.CLUE }}] = 'Escolha uma carta e digite uma pista para os outros jogadores.';
+actionMessages[{{ states.PLAY }}] = 'Escolha uma carta que corresponda à pista.';
+actionMessages[{{ states.VOTE }}] = 'Escolha a carta que você acha que corresponde a pista.';
+actionMessages[{{ states.END }}] = 'Talvez o último?';
 
 
 // Summary of game state for a player who needs to wait
 var waitingMessages = [];
-waitingMessages[{{ states.BEGIN }}] = 'Oczekiwanie na graczy...';
-waitingMessages[{{ states.CLUE }}] = 'Oczekiwanie na podpowiedź...';
-waitingMessages[{{ states.PLAY }}] = 'Oczekiwanie aż gracze wybiorą kartę...';
-waitingMessages[{{ states.VOTE }}] = 'Oczekiwanie aż gracze zagłosują...';
-waitingMessages[{{ states.END }}] = 'Oczekiwanie na kolejną grę...';
+waitingMessages[{{ states.BEGIN }}] = 'Aguardando jogadores ...';
+waitingMessages[{{ states.CLUE }}] = 'Esperando a pista ...';
+waitingMessages[{{ states.PLAY }}] = 'Esperando os jogadores escolherem a carta ...';
+waitingMessages[{{ states.VOTE }}] = 'Aguardando que os jogadores votem ...';
+waitingMessages[{{ states.END }}] = 'Esperando o próximo jogo ...';
 
 
 // Bunny status icons to display beside names and games
@@ -98,7 +98,7 @@ $(document).ready(function() {
         $.getJSON('getgames', function(data) {
             var html = [];
             if (data.length > 0 && activity(data[0].relLastActive)) {
-                html.push('<tr><th>&nbsp;</th><th>Host</th><th>Nazwa</th><th>Stan</th><th><img class="smiley" src="static/images/smilies/Bunny.png" title="(gee)" ascii="(gee)"></th><th>Pkt</th><th>Karty<th><th>&nbsp;</th></tr>');
+                html.push('<tr><th>&nbsp;</th><th>Anfitrião</th><th>Sala</th><th>Estado</th><th><img class="smiley" src="static/images/smilies/Bunny.png" title="(gee)" ascii="(gee)"></th><th>Pts</th><th>Cartas<th><th>&nbsp;</th></tr>');
             }
 
             $.each(data, function(i, game) {
@@ -640,7 +640,7 @@ $(document).ready(function() {
     $('#username').editable('setusername', {
         name : 'username',
         width : '200',
-        tooltip : 'Kliknij aby zmienić nick',
+        tooltip : 'Clique para alterar o apelido',
         callback : function(value, settings) {
             refreshGameList();
             refreshUserList();

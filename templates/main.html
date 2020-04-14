@@ -38,36 +38,36 @@
     <form id="createForm" action="create" method="post">
         <table cellspacing="0" cellpadding="4" border="0">
             <tr>
-                <td><label>Nazwa</label></td>
+                <td><label>Nome</label></td>
                 <td><input type="text" name="name" placeholder="(opcjonalna)" 
                             minlength="{{ limits.MIN_NAME }}" maxlength="{{ limits.MAX_NAME }}" /></td>
             </tr>
             <tr>
-                <td><label>Max graczy</label></td>
+                <td><label>N. máximo de jogadores</label></td>
                 <td><input type="text" name="max_players" value="6" placeholder="9" 
                             min="{{ limits.MIN_PLAYERS }}" max="{{ limits.MAX_PLAYERS }}" size="4" required /></td>
             </tr>
             <tr>
-                <td><label>Maksymalna ilość punktów</label></td>
+                <td><label>N. máximo de pontos</label></td>
                 <td><input type="text" name="max_score" value="30"  
                             min="{{ limits.MIN_SCORE }}" max="{{ limits.MAX_SCORE }}" size="4" /></td>
             </tr>
             <tr>
-                <td><label>Maksymalna długość podpowiedzi</label></td>
+                <td><label>Tamanho máximo da pista</label></td>
                 <td><input type="text" name="max_clue_length" value="1000"
                             min="{{ limits.MIN_CLUE_LENGTH }}" max="{{ limits.MAX_CLUE_LENGTH }}" size="4" required /></td>
             </tr>
             <tr>
-                <td><label>Automatyczne dokładanie kart</label></td>
+                <td><label>Adicionar cartas automaticamente</label></td>
                 <td>
-                    <input type="radio" name="auto" value="1" checked> Tak
+                    <input type="radio" name="auto" value="1" checked> Sim
                     <br>
-                    <input type="radio" name="auto" value="0"> Nie
+                    <input type="radio" name="auto" value="0"> Não
                 </td>
             </tr>
             <tr>
                 <td>
-                    Czas na odgadnięcie zagadki
+                    Tempo pra adivinhar o enigma
                 </td>
                 <td>
                     <input type="text" name="time_clue" value="360" min="60" max="1024" size="4" />
@@ -75,7 +75,7 @@
             </tr>
             <tr>
                 <td>
-                    Czas na wybranie karty
+                    Tempo pra escolher a carta
                 </td>
                 <td>
                     <input type="text" name="time_choose" value="120" min="45" max="1024" size="4" />
@@ -83,14 +83,14 @@
             </tr>
             <tr>
                 <td>
-                    Czas na odgadnięcie karty
+                    Tempo pra advinhar a carta
                 </td>
                 <td>
                     <input type="text" name="time_vote" value="120" min="30" max="1024" size="4" />
                 </td>
             </tr>
             <tr>
-                <td><label>Wybierz talie</label></td>
+                <td><label>Escolha os baralhos</label></td>
                 <td>
                     {% for i, card_set in enumerate(card_sets) %}
                     <p>
@@ -102,7 +102,7 @@
             </tr>
         </table>
 
-        <input type="submit" id="createOk" value="Create" /> <button id="cancelCreate">Anuluj</button>
+        <input type="submit" id="createOk" value="Criar" /> <button id="cancelCreate">Cancelar</button>
     </form>
 </div>
 
@@ -117,7 +117,7 @@
         <form id="sendMsg">
             <table id="chatInputContainer" cellspacing="0" cellpadding="0" border="0">
                 <tr>
-                    <td><input id="chatInput" type="text" name="msg" placeholder="Napisz coś wesołego!" value="{{ display.Labels.DEFAULT_TEXT }}" /></td>
+                    <td><input id="chatInput" type="text" name="msg" placeholder="Escreva algo divertido!" value="{{ display.Labels.DEFAULT_TEXT }}" /></td>
                     <td id="toggleSmileyList"></td>
                 </tr>
             </table>
@@ -131,7 +131,7 @@
         <div class="cloudMain"></div>
         <div class="cloudCenter"></div>
         <div class="cloudLeft"></div>
-        <div id="gameState">Witaj w Dixit!<br />Zmień swój login w prawym górnym rogu. Następnie stwórz, albo dołącz do gry!</div>
+        <div id="gameState">Bem-vindo ao Dixit!<br />Altere seu apelido no canto superior direito. Então crie ou entre no jogo!</div>
     </div>
 </div>
 
@@ -142,7 +142,7 @@
     </div>
 
     <div id="bunnyPalette">
-        <h1>Wybierz kolor</h1>
+        <h1>Escolha uma cor</h1>
 <table cellpadding="0" cellspacing="0" border="0">
 
 <tbody><tr>
@@ -185,7 +185,7 @@
 
     <div id="startGameContainer">
         <form id="startGame" style="display:none">
-            <button type="submit" id="startButton">Start!</button>
+            <button type="submit" id="startButton">Iniciar!</button>
         </form>
     </div>
 
@@ -197,17 +197,17 @@
 
     <div id="handContainer">
 
-        <div class="toggleHand centered" id="showHand"> ^ Pokaż moje karty ^</div>
+        <div class="toggleHand centered" id="showHand"> ^ Mostrar meus cartões ^</div>
         <div class="toggleHand centered" id="hideHand">v</div>
         <div id="hand" class="centered"></div>
     </div>
 
     <div id="actionBox">
         <form id="actionForm">
-            <textarea id="actionClue" name="clue" cols="40" rows="4" minlength="{{ limits.MIN_CLUE_LENGTH }}" placeholder="Miejsce na podpowiedź"></textarea>
+            <textarea id="actionClue" name="clue" cols="40" rows="4" minlength="{{ limits.MIN_CLUE_LENGTH }}" placeholder="Coloque a pista"></textarea>
             <div>
                 <input id="cardId" type="hidden" name="cid" value="" />
-                <input id="actionOk" type="submit" value="Ok" /> <button id="actionCancel">Anuluj</button>
+                <input id="actionOk" type="submit" value="Ok" /> <button id="actionCancel">Cancelar</button>
             </div>
         </form>
     </div>
@@ -215,7 +215,7 @@
 
 <audio>
 	<source src="http://havalite.com/experiment/jsound/rattle.mp3" type="audio/mpeg">
-	Your browser isn't invited for super fun audio time.
+    Seu navegador não está convidado para um tempo de áudio super divertido.
 </audio>
 
 {% end %}

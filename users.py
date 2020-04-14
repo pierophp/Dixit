@@ -15,7 +15,7 @@ class User(object):
         self.puid = puid  # this id is exposed to all users
 
         self.ping()
-        self.set_name('player.%s' % puid[:4])
+        self.set_name('jogador.%s' % puid[:4])
 
     def ping(self):
         """Updates the user to appear currently active."""
