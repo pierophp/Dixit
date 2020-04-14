@@ -565,13 +565,13 @@ $(document).ready(function() {
             // Handler for when a card is clicked; sets up the actionForm appropriately
             $('#actionForm').data('cmd', cmd);
             if (cmd == {{ commands.CREATE_CLUE }}) {
-                $('#actionOk').val('Stwórz');
+                $('#actionOk').val('Criar');
                 $('#actionClue').show().select();
             } else if (cmd == {{ commands.PLAY_CARD }}) {
-                $('#actionOk').val('Graj');
+                $('#actionOk').val('Mostrar');
                 $('#actionClue').hide();
             } else if (cmd == {{ commands.CAST_VOTE }}) {
-                $('#actionOk').val('Głosuj');
+                $('#actionOk').val('Votar');
                 $('#actionClue').hide();
             }
             $('#cardId').val($(this).attr('id'));
