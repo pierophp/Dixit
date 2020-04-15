@@ -438,3 +438,7 @@ margin-right: auto;
 #actionBox .error {
   display: block;
 }
+
+.clue-textarea {
+  font-size: 16px;
+}

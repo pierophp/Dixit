@@ -578,7 +578,7 @@ $(document).ready(function() {
                     name="clue-${caption}"
                     cols="40"
                     rows="2"
-                    class="form-control"
+                    class="form-control clue-textarea"
                     minlength="{{ limits.MIN_CLUE_LENGTH }}"
                     placeholder="Coloque a pista"
                     ></textarea>
