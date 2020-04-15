@@ -549,7 +549,6 @@ $(document).ready(function() {
         // $('#hand .card').click(setupActionFormHandler({{ commands.CREATE_CLUE }})).addClass('clickable');
         $('.fancybox-cards').fancybox({
             buttons: [
-                "zoom",
                 "fullScreen",
                 "close"
             ],
@@ -567,7 +566,6 @@ $(document).ready(function() {
 
         $('.fancybox-hand').fancybox({
             buttons: [
-                "zoom",
                 "fullScreen",
                 "close"
             ],
