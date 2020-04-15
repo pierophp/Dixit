@@ -68,50 +68,6 @@ h1 {
   border-color: #000;
 }
 
-#banner #dixitLogo {
-  height: 120px;
-}
-
-
-/* Creating a new game */
-
-#create {
-  padding: 10px;
-  text-align: center;
-  position: fixed;
-  margin-left: auto;
-  margin-right: auto;
-  top: 150px;
-  width: 500px;
-  left: 50%;
-  margin-left: -250px;
-  border: 1px solid #000;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  border-radius: 30px;
-  background-color: #fff3e0;
-  display: none;
-  z-index: 100;
-}
-
-#create table {
-  text-align: left;
-}
-
-#overlay {
-  /* Transparent overlay */
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 99;
-  background-color: #333;
-  opacity: 0.6;
-  display: none;
-}
-
-
 /* Chat room box */
 
 #username {
@@ -156,14 +112,11 @@ h1 {
 
 #chatRoom {
   background-color: #4576bb;
-  -webkit-border-bottom-left-radius: 5px;
-  -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
   padding: 0 0 5px 5px;
 }
 
 #chatLog {
-  background-color: #EEE;
   height: 111px;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -211,10 +164,6 @@ h1 {
   border-style: solid;
   border-color: #eee #eee #000 #aaa;
   background-color: #eee;
-  -webkit-border-top-left-radius: 5px;
-  -webkit-border-bottom-left-radius: 5px;
-  -moz-border-radius-topleft: 5px;
-  -moz-border-radius-bottomleft: 5px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }

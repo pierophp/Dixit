@@ -548,9 +548,6 @@ $(document).ready(function() {
 
         // $('#hand .card').click(setupActionFormHandler({{ commands.CREATE_CLUE }})).addClass('clickable');
         $('.fancybox-cards').fancybox({
-            thumbs : {
-                autoStart : true
-            },
             buttons: [
                 "zoom",
                 "fullScreen",
@@ -570,9 +567,6 @@ $(document).ready(function() {
 
 
         $('.fancybox-hand').fancybox({
-            thumbs : {
-                autoStart : true
-            },
             buttons: [
                 "zoom",
                 "fullScreen",
@@ -672,7 +666,6 @@ $(document).ready(function() {
         $('#createModal').modal('hide');
         e.preventDefault();
     }
-    $('#overlay').click(closeCreate);
     $('#cancelCreate').click(closeCreate);
     
     $('#createForm').submit(function(e) {
