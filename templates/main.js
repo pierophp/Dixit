@@ -198,17 +198,19 @@ $(document).ready(function() {
         setTimeout(userListWorker, 0);
     };
 
-
     // Periodic Chat Room Polling
     function formatHours(i) {
         return (i + 11) % 12 + 1;
     }
+
     function formatMinutes(i) {
         return i < 10 ? '0' + i : i;
     }
+
     function formatAmPm(i) {
         return i >= 12 ? 'pm' : 'am';
     }
+
     function addMessage(obj) {
         var date = new Date(obj.t * 1000);
         $('#chatLog').append('<p><span class="chatTime">('
@@ -217,6 +219,7 @@ $(document).ready(function() {
                            + '<span class="chatText" id="' + obj.mid + '"></span></p>');
         $('#' + obj.mid).html(smilify(obj.msg));
     };
+
     var chatRoomWorker = function worker() {
         $.getJSON('chat?t=' + lastChatUpdate, function(data) {
             chatLog = $('#chatLog');
@@ -326,18 +329,17 @@ $(document).ready(function() {
                 scoreBoard.push('<td><div class="userAction">' + extra + '</div></td>');
 
                 // Spacers to order player by rank
-                scoreBoard.push('<td><div style="width:40px">&nbsp;</div></td>');
                 scoreBoard.push(Array(data.ranked[puid] + 1).join('<td>&nbsp;</td>'));
 
                 // Player's bunny piece and score
-                if(data.colours[puid] == 'rainbow'){
+                if (data.colours[puid] == 'rainbow') {
 					scoreBoard.push('<td class="bunnyPiece"><div class="rainbow" '
 							+ 'title="' + textToHtml(data.players[puid]) + '"><img src="'
                               + ((data.state == {{ states.BEGIN }} || data.state == {{ states.END }})
                                ? '{{ display.Images.BUNNY_READY }}' : '{{ display.Images.BUNNY_RUN }}')
                               + '" /></div></td>');
 					scoreBoard.push('<td class="score">' + data.scores[puid] + '</td>');
-				}else{
+				} else {
 					scoreBoard.push('<td class="bunnyPiece"><div style="background-color: #' + data.colours[puid]
 								  + '" title="' + textToHtml(data.players[puid]) + '"><img src="'
 								  + ((data.state == {{ states.BEGIN }} || data.state == {{ states.END }})
@@ -385,7 +387,7 @@ $(document).ready(function() {
 
             // Current Clue
             if (data.round.clue !== undefined) {
-                $('#clue').html('Pista: "' + smilify(data.round.clue) + '"').fadeIn();
+                $('#clue').html('<b>Pista:</b> "' + smilify(data.round.clue) + '"').fadeIn();
             } else {
                 $('#clue').hide();
             }

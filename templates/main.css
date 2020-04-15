@@ -237,7 +237,7 @@ h1 {
 
 #scoreBoard .userAction {
   height: {{ display.Sizes.PIECE }}px;
-  width: 100px;
+  width: 20px;
   text-align: center;
 }
 
