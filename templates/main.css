@@ -367,7 +367,6 @@ margin-right: auto;
 #handContainer {
 /*	zoom: 0.7; */
   display: none;
-  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
