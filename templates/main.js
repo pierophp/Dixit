@@ -551,7 +551,6 @@ $(document).ready(function() {
             buttons: [
                 "zoom",
                 "fullScreen",
-                "thumbs",
                 "close"
             ],
             caption : function( instance, item ) {
@@ -570,7 +569,6 @@ $(document).ready(function() {
             buttons: [
                 "zoom",
                 "fullScreen",
-                "thumbs",
                 "close"
             ],
             caption : function( instance, item ) {
