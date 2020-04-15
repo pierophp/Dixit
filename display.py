@@ -43,8 +43,8 @@ class Sizes(object):
 
     PIECE        = 45
     BUNNY_PICKER = 70
-    CARD_WIDTH   = 100
-    CARD_HEIGHT  = 150
+    CARD_WIDTH   = 75
+    CARD_HEIGHT  = 100
     YOUR_TURN    = 24
     TOKEN        = 80
 
