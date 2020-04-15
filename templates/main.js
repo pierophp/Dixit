@@ -43,6 +43,7 @@ function pluralize(x) {
 };
 
 let userAction = '';
+let playedCard = '';
 
 function activityIcon(rel_last_active) {
     minutes = Math.floor(rel_last_active / 60);
@@ -97,6 +98,7 @@ function handleClue(cardId) {
 function handlePlay(cardId) {
     $('#actionForm').data('cmd', {{ commands.PLAY_CARD }});
     $('#cardId').val(cardId);
+    playedCard = cardId;
     $('#actionForm').submit();
     $.fancybox.close();
 }
@@ -557,6 +559,10 @@ $(document).ready(function() {
             caption : function( instance, item ) {
                 var caption = $(this).data('caption') || '';
                 if (userAction === 'vote') { 
+                    if (playedCard === caption) {
+                        return `<input type="button" class="btn btn-primary actionCreate" value="Minha Carta" disabled />`;
+                    }
+
                     return `<form>
                         <input type="button" onclick="handleVote('${caption}')" class="btn btn-primary actionCreate" value="Votar" />                    
                 </form>`;

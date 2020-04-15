@@ -147,6 +147,7 @@ h1 {
 
 #chatInput {
   width: 100%;
+  font-size: 16px;
 }
 
 #toggleSmileyList {
@@ -377,14 +378,10 @@ margin-right: auto;
 #hand {
   overflow-x: auto;
   display: inline-block;
-  height: {{ display.Sizes.CARD_HEIGHT }}px;
+  height: {{ display.Sizes.CARD_HEIGHT + 10 }}px;
   background-color: #FFF;
   padding: 5px;
   border: 1px solid #999;
-  -webkit-border-top-left-radius: 15px;
-  -webkit-border-top-right-radius: 15px;
-  -moz-border-radius-topleft: 15px;
-  -moz-border-radius-topright: 15px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 }
