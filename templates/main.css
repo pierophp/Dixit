@@ -72,28 +72,6 @@ h1 {
   height: 120px;
 }
 
-#createTab {
-  position: absolute;
-  background-color: #002f70;
-  border: 1px solid #444;
-  color: #EEE;
-  padding: 10px 15px 15px 15px;
-  top: 0;
-  left: 335px;
-  -webkit-border-bottom-left-radius: 15px;
-  -webkit-border-bottom-right-radius: 15px;
-  -moz-border-radius-bottomleft: 15px;
-  -moz-border-radius-bottomright: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  cursor: pointer;
-}
-
-#createTab:hover {
-  background-color: #EEE;
-  color: #002f70;
-}
-
 
 /* Creating a new game */
 
@@ -143,7 +121,7 @@ h1 {
   border: 1px;
   border-color: #000;
   border-style: solid;
-  height: 24px;
+  height: 40px;
   cursor: pointer;
   background-color: #002f70;
   color: #EEE;
@@ -171,10 +149,8 @@ h1 {
 }
 
 #chatRoomContainer {
-  position: fixed;
-  top: 0;
-  right: 0;
   width: 300px;
+  position: relative;
   z-index: 4;
 }
 
@@ -258,58 +234,6 @@ h1 {
 
 /* List of games that have been created */
 
-#gameListOuter {
-  position: absolute;
-  left: 450px;
-  top: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 132px;
-}
-
-#gameList {
-  float: left;
-  width: 100%;
-}
-
-#gameListPadder {
-  float: right;
-  width: 100px;
-}
-
-#gameTable {
-  width: 100%;
-  font-size: 80%;
-}
-
-#gameTable th {
-  padding: 5px;
-  color: #EEE;
-}
-
-#gameTable td {
-  padding: 5px;
-  border: 1px solid #235499;
-}
-
-#gameTable td.firstCell {
-  -webkit-border-top-left-radius: 10px;
-  -webkit-border-bottom-left-radius: 10px;
-  -moz-border-radius-topleft: 10px;
-  -moz-border-radius-bottomleft: 10px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  width: 11px;
-}
-
-#gameTable td.lastCell {
-  -webkit-border-top-right-radius: 10px;
-  -webkit-border-bottom-right-radius: 10px;
-  -moz-border-radius-topRight: 10px;
-  -moz-border-radius-bottomright: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
 
 #gameTable tr.activeGame td {
   background-color: #ACA;
@@ -323,68 +247,6 @@ h1 {
 #gameTable tr.visibleGame:hover td {
   background-color: #ffe4a4;
 }
-
-
-/* Cloud explaining state of game relative to user */
-
-#gameStateContainer {
-  position: absolute;
-  top: 60px;
-  right: 380px;
-  zoom: 0.8;
-  z-index: 1;
-}
-
-#gameState {
-  /* Displays the message */
-  position: relative;
-  text-align: center;
-  padding-top: 85px;
-  padding-left: 20px;
-  padding-right: 20px;
-  z-index: 1;
-}
-
-.cloudContainer {
-  width: 350px;
-  height: 150px;
-  position: relative;
-  opacity: 0.95;
-}
-
-.cloudContainer .cloudMain {
-  width: 350px;
-  height: 130px;
-  background: #f2f2f2;
-  border-radius: 100em;
-  position: absolute;
-  top: 50px;
-  box-shadow: 0 3px 5px rgba(0,0,0, 0.3);
-  background: linear-gradient(#F2F2F2 70%, #E5E5E5);
-}
-
-.cloudContainer .cloudCenter {
-  width: 180px;
-  height: 180px;
-  margin: 0 auto;
-  background: #F2F2F2;
-  position: absolute;
-  border-radius: 100em;
-  top: -30px;
-  right: 50px;
-}
-
-.cloudContainer .cloudLeft {
-  width: 130px;
-  height: 130px;
-  margin: 0 auto;
-  background: #F2F2F2;
-  position: absolute;
-  border-radius: 100em;
-  top: 0;
-  right: 160px;
-}
-
 
 /* Scoreboard for currently selected game */
 #scoreBoardContainer{
@@ -502,10 +364,6 @@ h1 {
   text-align: center;
 }
 
-#startButton {
-  padding: 15px;
-  font-size: 20px;
-}
 
 
 /* Card appearance */
@@ -540,10 +398,6 @@ margin-left: auto;
 margin-right: auto;
 }
 
-#cards {
-  cursor:crosshair;
-}
-
 #cards .card{
   
 }
@@ -574,7 +428,6 @@ margin-right: auto;
 }
 
 #hand {
-  cursor: crosshair;
   overflow-x: auto;
   display: inline-block;
   height: {{ display.Sizes.CARD_HEIGHT }}px;

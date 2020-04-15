@@ -41,21 +41,24 @@ waitingMessages[{{ states.END }}] = 'Esperando o próximo jogo ...';
 function pluralize(x) {
     return x != 1 ? 's' : '';
 };
+
+let userAction = '';
+
 function activityIcon(rel_last_active) {
     minutes = Math.floor(rel_last_active / 60);
     hours = Math.floor(minutes / 60);
     days = Math.floor(hours / 24);
     if (minutes == 0) {
-        var activity = 'Aktywny';
+        var activity = 'Ativo';
         var status = '{{ display.Images.ICON_ACTIVE }}';
     } else if (hours == 0) {
-        activity = 'Ostatnio aktywny ' + minutes + ' minut temu';
+        activity = 'Ativo a ' + minutes + ' minutos atrás';
         status = '{{ display.Images.ICON_AWAY }}';
     } else if (days == 0) {
-        activity = 'Last active ' + hours + ' hour' + pluralize(hours) + ' ago';
+        activity = 'Ativo ' + hours + ' hora' + pluralize(hours) + ' atrás';
         status = '{{ display.Images.ICON_ASLEEP }}';
     } else {
-        activity = 'Away for ' + days + ' day' + pluralize(days);
+        activity = 'Fora por ' + days + ' dia' + pluralize(days);
         status = '{{ display.Images.ICON_ASLEEP }}';
     }
     return '<img src="' + status + '" title="' + activity + '" />';
@@ -71,7 +74,7 @@ function activity(rel_last_active) {
         return true;
     } else if (days == 0) {
         return false;
-    }else{
+    } else {
         return false;
     }
 }
@@ -82,6 +85,28 @@ function smilify(text) {
     return smilifyText(text, '{{ display.WebPaths.SMILIES }}');
 };
 
+function handleClue(cardId) {
+    $('#actionForm').data('cmd', {{ commands.CREATE_CLUE }});
+    const clue = $(`[name=clue-${cardId}]`).val();
+    $('#cardId').val(cardId);
+    $('#actionClue').val(clue);
+    $('#actionForm').submit();
+    $.fancybox.close();
+}
+
+function handlePlay(cardId) {
+    $('#actionForm').data('cmd', {{ commands.PLAY_CARD }});
+    $('#cardId').val(cardId);
+    $('#actionForm').submit();
+    $.fancybox.close();
+}
+
+function handleVote(cardId) {
+    $('#actionForm').data('cmd', {{ commands.CAST_VOTE }});
+    $('#cardId').val(cardId);
+    $('#actionForm').submit();
+    $.fancybox.close();
+}
 
 // All of the jQuery stuff
 $(document).ready(function() {
@@ -97,8 +122,11 @@ $(document).ready(function() {
     var gameListWorker = function worker() {
         $.getJSON('getgames', function(data) {
             var html = [];
-            if (data.length > 0 && activity(data[0].relLastActive)) {
-                html.push('<tr><th>&nbsp;</th><th>Anfitrião</th><th>Sala</th><th>Estado</th><th><img class="smiley" src="static/images/smilies/Bunny.png" title="(gee)" ascii="(gee)"></th><th>Pts</th><th>Cartas<th><th>&nbsp;</th></tr>');
+            data = data.filter((item) => {
+                return activity(item.relLastActive);
+            });
+            if (data.length > 0) {
+                html.push('<thead class="thead-dark"><tr><th>&nbsp;</th><th>Anfitrião</th><th>Sala</th><th>Ação</th><th><img class="smiley" src="static/images/smilies/Bunny.png" title="(gee)" ascii="(gee)"></th><th>Pts</th><th>Cartas</th><th>&nbsp;</th></tr></thead>');
             }
 
             $.each(data, function(i, game) {
@@ -119,6 +147,7 @@ $(document).ready(function() {
                     html.push('</tr>');
                 }
             });
+
             $('#gameTable').html(html.join(''));
 
             // Register handlers for elements that have been added dynamically
@@ -431,7 +460,7 @@ $(document).ready(function() {
 
             function randomClue(){
                 $('#' + $($('#hand .card')[0]).attr('id')).click();
-                $('#actionClue').val('LUBIĘ PENISY I ZMUSZAM INNYCH DO CZEKANIA!');
+                $('#actionClue').val('Romance no ar!');
                 $('#actionOk').click();
             }
 
@@ -471,29 +500,22 @@ $(document).ready(function() {
 
             // Bind/unbind state-dependent click handlers to all cards
             if (data.state == {{ states.CLUE }} && clueMaker == data.user) {
-                $('#cards .card').unbind('click').removeClass('clickable');
-                $('#hand .card').click(setupActionFormHandler({{ commands.CREATE_CLUE }})).addClass('clickable');
-
+                userAction = 'clue';
                 if(window.time >= window.time_clue){
                     randomClue();
                 }
             } else if (data.state == {{ states.PLAY }} && data.requiresAction[data.user]) {
-                $('#cards .card').unbind('click').removeClass('clickable');
-                $('#hand .card').click(setupActionFormHandler({{ commands.PLAY_CARD }})).addClass('clickable');
+                userAction = 'play';
 
                 if(window.time >= window.time_choose) {
                     randomHandCard();
                 }
             } else if (data.state == {{ states.VOTE }} && data.requiresAction[data.user]) {
-                $('#hand .card').unbind('click').removeClass('clickable');
-                $('#cards .card').click(setupActionFormHandler({{ commands.CAST_VOTE }})).addClass('clickable');
-
+                userAction = 'vote';
                 if(window.time >= window.time_vote) {
                     randomVoteCard();
                 }
-            } else {
-                $('.card').unbind('click').removeClass('clickable');
-            }
+            } 
         }).always(function() {
             setTimeout(gameBoardWorker, GAMEBOARD_INTERVAL);
         });
@@ -506,11 +528,13 @@ $(document).ready(function() {
 
     // Change either the current cards or the user's hand
     function cardCell(card, hack) {
-        return '<div class="card magnifier" id="' + card.cid + '" hack="' + hack + '">'
-              + '<img class="small" src="' + card.url + '" />'
+        return '<div class="card" id="' + card.cid + '" hack="' + hack + '">'
+              + '<a href="' + card.url + '" class="fancybox-' + (hack ? 'hand' : 'cards')+ '" data-fancybox="gallery-' + hack + '" data-caption="' + card.cid + '"><img class="small" src="' + card.url + '" /></a>'
               + '<div class="large" style="background-image:url(\'' + card.url + '\')"></div>'
               + '</div>';
     }
+
+
     function updateCards(cards, containerId) {
         if (cards === undefined) {
             $(containerId).html('');
@@ -521,8 +545,67 @@ $(document).ready(function() {
             html.push(cardCell(card, containerId == '#hand'));
         });
         $(containerId).html(html.join('')).fadeIn();
-        $('.card').mousemove(magnifyHandler).mouseout(magnifyHandler);
+
+        // $('#hand .card').click(setupActionFormHandler({{ commands.CREATE_CLUE }})).addClass('clickable');
+        $('.fancybox-cards').fancybox({
+            thumbs : {
+                autoStart : true
+            },
+            buttons: [
+                "zoom",
+                "fullScreen",
+                "thumbs",
+                "close"
+            ],
+            caption : function( instance, item ) {
+                var caption = $(this).data('caption') || '';
+                if (userAction === 'vote') { 
+                    return `<form>
+                        <input type="button" onclick="handleVote('${caption}')" class="btn btn-primary actionCreate" value="Votar" />                    
+                </form>`;
+                }
+                return '<div></div>';
+            }
+        });
+
+
+        $('.fancybox-hand').fancybox({
+            thumbs : {
+                autoStart : true
+            },
+            buttons: [
+                "zoom",
+                "fullScreen",
+                "thumbs",
+                "close"
+            ],
+            caption : function( instance, item ) {
+                var caption = $(this).data('caption') || '';
+
+                if (userAction === 'clue') { 
+                    return `<form>
+                    <textarea
+                    name="clue-${caption}"
+                    cols="40"
+                    rows="2"
+                    class="form-control"
+                    minlength="{{ limits.MIN_CLUE_LENGTH }}"
+                    placeholder="Coloque a pista"
+                    ></textarea>
+                    <input type="button" onclick="handleClue('${caption}')" class="btn btn-primary actionCreate" value="Criar" />
+                </form>`;
+                } else if (userAction === 'play') { 
+                    return `<form>
+                        <input type="button" onclick="handlePlay('${caption}')" class="btn btn-primary actionCreate" value="Escolher" />
+                    </form>`;
+                }
+
+
+                return '<div></div>'
+            }
+        });
     }
+
 
 
     // Game board communication
@@ -560,24 +643,6 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
-    function setupActionFormHandler(cmd) {
-        return function(e) {
-            // Handler for when a card is clicked; sets up the actionForm appropriately
-            $('#actionForm').data('cmd', cmd);
-            if (cmd == {{ commands.CREATE_CLUE }}) {
-                $('#actionOk').val('Criar');
-                $('#actionClue').show().select();
-            } else if (cmd == {{ commands.PLAY_CARD }}) {
-                $('#actionOk').val('Escolher');
-                $('#actionClue').hide();
-            } else if (cmd == {{ commands.CAST_VOTE }}) {
-                $('#actionOk').val('Votar');
-                $('#actionClue').hide();
-            }
-            $('#cardId').val($(this).attr('id'));
-            $('#actionBox').css('top', e.pageY).css('left', e.pageX).fadeIn('slow');
-        };
-    };
     $('#actionForm').submit(function(e) {
         var cmd = $(this).data('cmd');
         if (cmd == {{ commands.CREATE_CLUE }}) {
@@ -603,18 +668,13 @@ $(document).ready(function() {
     $('#actionForm').validate();
 
 
-    // Create a new game
-    $('#createTab').click(function() {
-        $('#overlay').show();
-        $('#create').show();
-    });
     function closeCreate(e) {
-        $('#overlay').hide();
-        $('#create').hide();
+        $('#createModal').modal('hide');
         e.preventDefault();
     }
     $('#overlay').click(closeCreate);
     $('#cancelCreate').click(closeCreate);
+    
     $('#createForm').submit(function(e) {
         if (!$(this).valid()) {
             return e.preventDefault();
@@ -678,33 +738,6 @@ $(document).ready(function() {
         }
     };
 
-
-    // Static document-wide jQuery handlers
-    $(document).tooltip();
-    $('button').button();
-    $('#actionOk').button();
-    $('#createOk').button();
-    $('#gameStateContainer').draggable();
-	$( "#chatRoomContainer" ).resizable({ alsoResize: "#chatLog", ghost: "true" });
-    $( "#userTableOuter" ).resizable({alsoResize: "#userTable", ghost: "true" });
-	$( "#chatRoomContainer" ).draggable();
-	$( "#chatRoomContainer" ).draggable();
-
-    function resizeFix(event, ui) {
-        var y = ui.size.height/ui.originalSize.height;
-        var x = y;
-
-        //$( "#scoreBoardContainer" ).hide();
-        //$( "#scoreBoard" ).css("-ms-transform", "scale("+x+","+y+")");
-        //$( "#scoreBoard" ).css("-webkit-transform", "scale("+x+","+y+")");
-        //$( "#scoreBoard" ).css("transform", "scale("+x+","+y+")");
-        $( "#scoreBoard" ).css("zoom", y);
-    }
-
-    $( "#scoreBoardContainer" ).resizable({
-        resize: resizeFix
-    });
-
     // Chat smiley list
     var smileyList = [];
     $.each(smileys, function(text, image) {
@@ -729,9 +762,11 @@ $(document).ready(function() {
         $('#smileyList').fadeOut();
         e.preventDefault();
     });
+
     $('#toggleSmileyList').html(smilify(':)')).hover(function() {
         $('#smileyList').fadeIn();
     });
+
     $(document).click(function() {
         $('#smileyList').fadeOut();
     });
