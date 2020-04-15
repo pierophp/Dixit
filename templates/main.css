@@ -325,7 +325,7 @@ h1 {
   border: 1px solid #bbb;
   border-radius: 10px;
   overflow: hidden;
-  height: {{ display.Sizes.CARD_HEIGHT }}px;
+  min-height: {{ display.Sizes.CARD_HEIGHT }}px;
 }
 
 .card .small {
@@ -437,4 +437,8 @@ margin-right: auto;
 
 .clue-textarea {
   font-size: 16px;
+}
+
+.right-answer {
+  border: 3px solid #53bf00;
 }

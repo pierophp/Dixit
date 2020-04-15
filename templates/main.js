@@ -433,7 +433,9 @@ $(document).ready(function() {
                         //     + 'px;background-color:#' + data.colours[puid] + '">&nbsp;</div>');
                         // }
                         
-                        card.append(`<div class="voter">${data.players[puid]}</div>`);
+                        if (puid != data.round.clueMaker) {
+                            card.append(`<div class="voter">${data.players[puid]}</div>`);
+                        }
                     });
                     // $('.token').fadeIn();
                     $.each(data.round.owners, function(puid, cid) {
@@ -448,6 +450,8 @@ $(document).ready(function() {
 						
                         if (puid != data.round.clueMaker) {
                             // card.find('.small').fadeTo(400, 0.1);
+                            
+                        } else {
                             card.addClass('right-answer');
                         }
 
