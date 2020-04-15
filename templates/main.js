@@ -560,7 +560,7 @@ $(document).ready(function() {
                 var caption = $(this).data('caption') || '';
                 if (userAction === 'vote') { 
                     if (playedCard === caption) {
-                        return `<input type="button" class="btn btn-primary actionCreate" value="Minha Carta" disabled />`;
+                        return `<input type="button" class="btn btn-warning actionCreate" value="Minha Carta" disabled />`;
                     }
 
                     return `<form>
