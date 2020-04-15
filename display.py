@@ -46,7 +46,7 @@ class Sizes(object):
     CARD_WIDTH   = 40
     CARD_HEIGHT  = 60
     YOUR_TURN    = 24
-    TOKEN        = 80
+    TOKEN        = 15
 
 
 class BunnyPalette(object):
