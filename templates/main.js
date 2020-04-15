@@ -301,7 +301,7 @@ $(document).ready(function() {
             var scoreBoard = [];
             $.each(data.order, function(i, puid) {
                 // Determine if a winner
-                var isWinner = (data.state == {{ states.END }} && data.ranked[puid] == maxRank);
+                var isWinner = (data.state == {{ states.END }} && data.ranked[puid] >= maxRank);
 
                 // Indicate who's clue it is
                 scoreBoard.push('<tr>');
@@ -421,33 +421,37 @@ $(document).ready(function() {
                 if (data.round.cards !== undefined) {
                     $.each(data.round.votes, function(puid, cid) {
                         var card = $('#' + cid);
-                        var randomLeft = Math.ceil(card.position().left + Math.random() * {{ display.Sizes.CARD_WIDTH - display.Sizes.TOKEN }});
-                        var randomTop = Math.ceil(card.offset().top + Math.random() * {{ display.Sizes.CARD_HEIGHT - display.Sizes.TOKEN }});
-                        if(data.colours[puid] == 'rainbow'){
-							card.append('<div class="token rainbow" title="' + textToHtml(data.players[puid])
-                                  + '" style="left:' + randomLeft + 'px;top:' + randomTop
-                                  + 'px;">&nbsp;</div>');
-						}else{
-							card.append('<div class="token" title="' + textToHtml(data.players[puid])
-                            + '" style="left:' + randomLeft + 'px;top:' + randomTop
-                            + 'px;background-color:#' + data.colours[puid] + '">&nbsp;</div>');
-						}
+                        // var randomLeft = Math.ceil(card.position().left + Math.random() * {{ display.Sizes.CARD_WIDTH - display.Sizes.TOKEN }});
+                        // var randomTop = Math.ceil(card.offset().top + Math.random() * {{ display.Sizes.CARD_HEIGHT - display.Sizes.TOKEN }});
+                        // if(data.colours[puid] == 'rainbow'){
+						// 	card.append('<div class="token rainbow" title="' + textToHtml(data.players[puid])
+                        //           + '" style="left:' + randomLeft + 'px;top:' + randomTop
+                        //           + 'px;">&nbsp;</div>');
+						// }else{
+						// 	card.append('<div class="token" title="' + textToHtml(data.players[puid])
+                        //     + '" style="left:' + randomLeft + 'px;top:' + randomTop
+                        //     + 'px;background-color:#' + data.colours[puid] + '">&nbsp;</div>');
+                        // }
+                        
+                        card.append(`<div class="voter">${data.players[puid]}</div>`);
                     });
-                    $('.token').fadeIn();
+                    // $('.token').fadeIn();
                     $.each(data.round.owners, function(puid, cid) {
                         var card = $('#' + cid);
                         
-                        if(data.colours[puid] == 'rainbow'){
-							card.addClass("rainbow");
-						}else{
-							card.css({'background-color' : '#' + data.colours[puid],
-									  'border-color' : '#' + data.colours[puid]});
-						}
+                        // if(data.colours[puid] == 'rainbow'){
+						// 	card.addClass("rainbow");
+						// }else{
+						// 	card.css({'background-color' : '#' + data.colours[puid],
+						// 			  'border-color' : '#' + data.colours[puid]});
+						// }
 						
                         if (puid != data.round.clueMaker) {
-                            card.find('.small').fadeTo(400, 0.1);
+                            // card.find('.small').fadeTo(400, 0.1);
+                            card.addClass('right-answer');
                         }
-                        card.attr('title', data.players[puid]);
+
+                        card.prepend(`<div class="owner">${data.players[puid]}</div>`);
                     });
                 }
             }
