@@ -419,6 +419,7 @@ $(document).ready(function() {
             if (data.round.votesHash != votesHash) {
                 votesHash = data.round.votesHash;
                 if (data.round.cards !== undefined) {
+                    card.append(`<div class="owner"><b>${data.players[puid]}</b></div>`);
                     $.each(data.round.votes, function(puid, cid) {
                         var card = $('#' + cid);
                         // var randomLeft = Math.ceil(card.position().left + Math.random() * {{ display.Sizes.CARD_WIDTH - display.Sizes.TOKEN }});
@@ -454,8 +455,7 @@ $(document).ready(function() {
                         } else {
                             card.addClass('right-answer');
                         }
-
-                        card.prepend(`<div class="owner">${data.players[puid]}</div>`);
+                        
                     });
                 }
             }
