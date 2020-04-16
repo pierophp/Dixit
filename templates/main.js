@@ -419,6 +419,26 @@ $(document).ready(function() {
             if (data.round.votesHash != votesHash) {
                 votesHash = data.round.votesHash;
                 if (data.round.cards !== undefined) {
+                    $.each(data.round.owners, function(puid, cid) {
+                        var card = $('#' + cid);
+                        
+                        // if(data.colours[puid] == 'rainbow'){
+						// 	card.addClass("rainbow");
+						// }else{
+						// 	card.css({'background-color' : '#' + data.colours[puid],
+						// 			  'border-color' : '#' + data.colours[puid]});
+						// }
+						
+                        if (puid != data.round.clueMaker) {
+                            // card.find('.small').fadeTo(400, 0.1);
+                            
+                        } else {
+                            card.addClass('right-answer');
+                        }
+
+                        card.append(`<div class="owner"><b>${data.players[puid]}</b></div>`);
+                    });
+
                     $.each(data.round.votes, function(puid, cid) {
                         var card = $('#' + cid);
                         // var randomLeft = Math.ceil(card.position().left + Math.random() * {{ display.Sizes.CARD_WIDTH - display.Sizes.TOKEN }});
@@ -438,25 +458,7 @@ $(document).ready(function() {
                         }
                     });
                     // $('.token').fadeIn();
-                    $.each(data.round.owners, function(puid, cid) {
-                        var card = $('#' + cid);
-                        
-                        // if(data.colours[puid] == 'rainbow'){
-						// 	card.addClass("rainbow");
-						// }else{
-						// 	card.css({'background-color' : '#' + data.colours[puid],
-						// 			  'border-color' : '#' + data.colours[puid]});
-						// }
-						
-                        if (puid != data.round.clueMaker) {
-                            // card.find('.small').fadeTo(400, 0.1);
-                            
-                        } else {
-                            card.addClass('right-answer');
-                        }
-
-                        card.prepend(`<div class="owner">${data.players[puid]}</div>`);
-                    });
+                   
                 }
             }
 
