@@ -2,7 +2,9 @@
   "port": 4660,
   "card_sets": {
     "Dixit": ["dixit", true],
-    "Pinterest": ["pinterest", true]
+    "Pinterest": ["pinterest", true],
+    "Digitalizados (Original)": ["digitalizados", true],
+    "Digitalizados (Expansão)": ["digitalizados_expansao", true]
   },
 
   "admin_password": ""
