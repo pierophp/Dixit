@@ -201,8 +201,7 @@ h1 {
 /* Scoreboard for currently selected game */
 #scoreBoardContainer{
 	overflow-y: auto;
-	overflow-x: hidden;
-    border-bottom: 1px solid;
+  border-bottom: 1px solid;
 }
 
 #scoreBoard {
